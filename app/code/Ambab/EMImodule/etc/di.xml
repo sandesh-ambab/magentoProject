@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<virtualType name="AllemiGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Ambab\EMImodule\Model\ResourceModel\Emidetails\Collection</argument>
+        </arguments>
+    </virtualType>
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="emicalc_emidetails_listing_data_source" xsi:type="string">Ambab\EMImodule\Model\ResourceModel\Emidetails\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Ambab\EMImodule\Model\ResourceModel\Emidetails\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">emi_bank</argument>
+            <argument name="eventPrefix" xsi:type="string">ambab_emidetails_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">ambab_emidetails_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Ambab\EMImodule\Model\ResourceModel\Emidetails</argument>
+        </arguments>
+    </type>
+</config>

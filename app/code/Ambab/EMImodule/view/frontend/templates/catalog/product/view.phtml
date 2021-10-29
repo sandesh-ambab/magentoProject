@@ -1,0 +1,69 @@
+
+<?php if ($block->toShowBlock()): ?>
+<a href="#" id="click-me">EMI starts from $399</a>
+<?php endif; ?>
+
+<div id="popup-modal">
+    <h3> EMI details of banks</h3>
+    <div id="accordion" data-mage-init='{
+        "accordion":{
+            "active": [0],
+            "collapsible": true,
+            "openedState": "active",
+            "multipleCollapsible": true
+        }}'>
+    <div data-role="collapsible">
+        <div data-role="trigger">
+            <h4>State Bank of India</h4>
+        </div>
+    </div>
+    <div data-role="content">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</div>
+
+    <div data-role="collapsible">
+        <div data-role="trigger">
+            <h4>Bank of Maharashtra</h4>
+        </div>
+    </div>
+    <div data-role="content"> It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</div>
+
+    <div data-role="collapsible">
+        <div data-role="trigger">
+            <h4>HDFC Bank</h4>
+        </div>
+    </div>
+    <div data-role="content">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</div>
+    </div>
+</div>
+<script>
+    require(
+    [
+        'jquery',
+        'Magento_Ui/js/modal/modal'
+    ],
+    function(
+        $,
+        modal
+    ) {
+        var options = {
+            type: 'popup',
+            responsive: true,
+            innerScroll: true,
+            buttons: [{
+                text: $.mage.__('ok'),
+                class: 'mymodal1',
+                click: function () {
+                    this.closeModal();
+                }
+            }]
+        };
+
+        var popup = modal(options, $('#popup-modal'));
+        $("#click-me").on('click',function(){
+            $("#popup-modal").modal("openModal");
+        });
+    }
+);
+</script>
+
+
+

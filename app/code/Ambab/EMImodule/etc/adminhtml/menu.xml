@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+	<menu>
+	  <add id="Ambab_EMImodule::emicalculator" title="EMI Calculator" translate="title" module="Ambab_EMImodule" sortOrder="50" dependsOnModule="Ambab_EMImodule" resource="Ambab_EMImodule::emicalculator"/>
+	  <add id="Ambab_EMImodule::bank" title="Add Bank Details" translate="title" module="Ambab_EMImodule" parent="Ambab_EMImodule::emicalculator" sortOrder="10" dependsOnModule="Ambab_EMImodule" action="emicalc/EmiDetails" resource="Ambab_EMImodule::emidetails"/>
+	  <add id="Ambab_EMImodule::configuration" title="Configuration" translate="title" module="Ambab_EMImodule" parent="Ambab_EMImodule::emicalculator" sortOrder="40" dependsOnModule="Ambab_EMImodule" action="adminhtml/system_config/edit/section/emi_calc_module_enable" resource="Ambab_EMImodule::configuration"/>
+	</menu>
+</config>
