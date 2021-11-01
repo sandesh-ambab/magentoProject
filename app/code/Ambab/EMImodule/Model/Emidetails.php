@@ -39,5 +39,15 @@ class Emidetails extends AbstractModel implements EmidetailsInterface, IdentityI
 	{
 		return $this->getData(self::BANK_NAME); 
 	}
+
+    public function setId($id)
+    {
+        return $this->setData(self::BANK_ID, $id);
+    }
+	
+	public function setBankName($bank_name)
+    {
+        return $this->setData(self::BANK_NAME, $bank_name);
+    }
 }
 

@@ -1,7 +1,9 @@
 <?xml version="1.0"?>
 
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-	<virtualType name="AllemiGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+	<preference for="Ambab\EMImodule\Api\Data\EmidetailsInterface" type="Ambab\EMImodule\Model\Emidetails" />
+	<preference for="Ambab\EMImodule\Api\EmidetailsRepositoryInterface" type="Ambab\EMImodule\Model\EmidetailsRepository" />
+    <virtualType name="AllemiGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
         <arguments>
             <argument name="collection" xsi:type="object" shared="false">Ambab\EMImodule\Model\ResourceModel\Emidetails\Collection</argument>
         </arguments>
@@ -19,6 +21,13 @@
             <argument name="eventPrefix" xsi:type="string">ambab_emidetails_grid_collection</argument>
             <argument name="eventObject" xsi:type="string">ambab_emidetails_collection</argument>
             <argument name="resourceModel" xsi:type="string">Ambab\EMImodule\Model\ResourceModel\Emidetails</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\Model\Entity\RepositoryFactory">
+        <arguments>
+            <argument name="entities" xsi:type="array">
+                <item name="Ambab\EMImodule\Api\Data\EmidetailsInterface" xsi:type="string">Ambab\EMImodule\Api\EmidetailsRepositoryInterface</item>
+            </argument>
         </arguments>
     </type>
 </config>

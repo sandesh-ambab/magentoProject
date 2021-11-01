@@ -1,6 +1,6 @@
 <?php 
 
-namespace Ambab\EMImodule\Model\Api\Data;
+namespace Ambab\EMImodule\Api\Data;
 
 interface EmidetailsInterface
 {

@@ -10,10 +10,10 @@ use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Reflection\DataObjectProcessor;
 use Ambab\EMImodule\Model\ResourceModel\Emidetails as ResourceEmidetails;
-use Rsgitech\News\Model\ResourceModel\Allnews\CollectionFactory as AllnewsCollectionFactory;
+use Ambab\EMImodule\Model\ResourceModel\Emidetails\CollectionFactory as EmidetailsCollectionFactory;
 use Magento\Store\Model\StoreManagerInterface;
 
-class AllnewsRepository implements AllnewsRepositoryInterface
+class EmidetailsRepository implements EmidetailsRepositoryInterface
 {
     protected $resource;
 
@@ -62,7 +62,7 @@ class AllnewsRepository implements AllnewsRepositoryInterface
 
     public function getById($bankId)
     {
-		$bank = $this->allnewsFactory->create();
+		$bank = $this->emidetailsFactory->create();
         $bank->load($bankId);
         if (!$bank->getId()) {
             throw new NoSuchEntityException(__('News with id "%1" does not exist.', $bankId));
@@ -70,7 +70,7 @@ class AllnewsRepository implements AllnewsRepositoryInterface
         return $bank;
     }
 	
-    public function delete(\Rsgitech\News\Api\Data\AllnewsInterface $bank)
+    public function delete(\Ambab\EMImodule\Api\Data\EmidetailsInterface $bank)
     {
         try {
             $this->resource->delete($bank);
@@ -88,4 +88,3 @@ class AllnewsRepository implements AllnewsRepositoryInterface
         return $this->delete($this->getById($bankId));
     }
 }
-?>

@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
+
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
 	<menu>
 	  <add id="Ambab_EMImodule::emicalculator" title="EMI Calculator" translate="title" module="Ambab_EMImodule" sortOrder="50" dependsOnModule="Ambab_EMImodule" resource="Ambab_EMImodule::emicalculator"/>

@@ -18,29 +18,16 @@ class EmidetailsActions extends Column
     const CMS_URL_PATH_EDIT = 'emicalc/emidetails/edit';
     const CMS_URL_PATH_DELETE = 'emicalc/emidetails/delete';
 
-    /**
-     * @var \Magento\Framework\UrlInterface
-     */
+    
     protected $urlBuilder;
 
-    /**
-     * @var string
-     */
+    
     private $editUrl;
 
-    /**
-     * @var Escaper
-     */
+    
     private $escaper;
 
-    /**
-     * @param ContextInterface $context
-     * @param UiComponentFactory $uiComponentFactory
-     * @param UrlInterface $urlBuilder
-     * @param array $components
-     * @param array $data
-     * @param string $editUrl
-     */
+    
     public function __construct(
         ContextInterface $context,
         UiComponentFactory $uiComponentFactory,
@@ -54,12 +41,7 @@ class EmidetailsActions extends Column
         parent::__construct($context, $uiComponentFactory, $components, $data);
     }
 
-    /**
-     * Prepare Data Source
-     *
-     * @param array $dataSource
-     * @return array
-     */
+    
     public function prepareDataSource(array $dataSource)
     {
         if (isset($dataSource['data']['items'])) {
@@ -86,11 +68,7 @@ class EmidetailsActions extends Column
         return $dataSource;
     }
 
-    /**
-     * Get instance of escaper
-     * @return Escaper
-     * @deprecated 101.0.7
-     */
+
     private function getEscaper()
     {
         if (!$this->escaper) {
