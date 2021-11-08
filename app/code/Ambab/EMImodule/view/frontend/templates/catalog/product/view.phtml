@@ -1,39 +1,55 @@
 
-<?php if ($block->toShowBlock()): ?>
+<?php
+
+use Elasticsearch\Endpoints\Ml\Forecast;
+
+if ($block->toShowBlock()): ?>
 <a href="#" id="click-me">EMI starts from $399</a>
 <?php endif; ?>
 
 <div id="popup-modal">
     <h3> EMI details of banks</h3>
-    <div id="accordion" data-mage-init='{
-        "accordion":{
-            "active": [0],
-            "collapsible": true,
-            "openedState": "active",
-            "multipleCollapsible": true
-        }}'>
-    <div data-role="collapsible">
-        <div data-role="trigger">
-            <h4>State Bank of India</h4>
-        </div>
-    </div>
-    <div data-role="content">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</div>
+    <?php
+            $price = $block->getProductPrize();
+            $collection = $block->getCollection();
+    ?>
+    
 
-    <div data-role="collapsible">
-        <div data-role="trigger">
-            <h4>Bank of Maharashtra</h4>
-        </div>
-    </div>
-    <div data-role="content"> It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</div>
+        <table class="data table" id="test-data-table">
+                <caption class="table-caption">Vky Test Data</caption>
+                <thead>
+                    <tr>
+                        <th scope="col" class="col title">Id</th>
+                        <th scope="col" class="col author">Bank Name</th>
+                        <th scope="col" class="col content">Month</th>
+                        <th scope="col" class="col created_at">Rate of Interest</th>
+                        <th scope="col" class="col actions">Price</th>
+                        <th scope="col" class="col actions">Emi amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php 
+                    foreach ($collection as $data):
+                    $month = $data->getMonth();
+                    $roi = $data->getRoi();
+                    $roi = $roi / (12 * 100);
+                    $emi = ($price * $roi * pow(1 + $roi, $month)) /  
+                            (pow(1 + $roi, $month) - 1); 
+                    $emiamt = round($emi);
+                    ?>
+                        <tr>
+                            <td data-th="Title" class="col title"><?php echo $data->getId(); ?></td>
+                            <td data-th="Author" class="col author"><?php echo $data->getBankName(); ?></td>
+                            <td data-th="Content" class="col content"><?php echo $data->getMonth(); ?></td>
+                            <td data-th="Date" class="col created_at"><?php echo $data->getRoi(); ?></td>
+                            <td data-th="Date" class="col created_at"><?php echo $price; ?></td>
+                            <td data-th="Date" class="col created_at"><?php echo $emiamt; ?></td>
 
-    <div data-role="collapsible">
-        <div data-role="trigger">
-            <h4>HDFC Bank</h4>
-        </div>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
     </div>
-    <div data-role="content">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</div>
-    </div>
-</div>
 <script>
     require(
     [
@@ -49,7 +65,7 @@
             responsive: true,
             innerScroll: true,
             buttons: [{
-                text: $.mage.__('ok'),
+                text: $.mage.__('Ok'),
                 class: 'mymodal1',
                 click: function () {
                     this.closeModal();

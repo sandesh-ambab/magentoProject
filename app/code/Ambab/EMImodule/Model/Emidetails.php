@@ -40,6 +40,16 @@ class Emidetails extends AbstractModel implements EmidetailsInterface, IdentityI
 		return $this->getData(self::BANK_NAME); 
 	}
 
+    public function getMonth()
+	{
+		return $this->getData(self::MONTH); 
+	}
+
+    public function getBankRoi()
+    {
+        return $this->getData(self::BANK_ROI); 
+    }
+
     public function setId($id)
     {
         return $this->setData(self::BANK_ID, $id);
@@ -48,6 +58,16 @@ class Emidetails extends AbstractModel implements EmidetailsInterface, IdentityI
 	public function setBankName($bank_name)
     {
         return $this->setData(self::BANK_NAME, $bank_name);
+    }
+
+    public function setMonth($month)
+    {
+        return $this->setData(self::MONTH, $month);
+    }
+
+    public function setBankRoi($roi)
+    {
+        return $this->setData(self::BANK_ROI, $roi);
     }
 }
 

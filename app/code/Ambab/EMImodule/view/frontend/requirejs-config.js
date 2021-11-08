@@ -1,10 +1,7 @@
 var config = {
-    paths: {            
-         'myjs': "Ambab_EMImodule/js/customfile"
-      },   
-    shim: {
-    'myjs': {
-        deps: ['jquery']
-    }
-  }
-}
+  map: {
+      '*': {
+          BuyNow:       'Magento_Catalog/js/buynow'
+      }
+  },
+};

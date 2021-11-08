@@ -93,5 +93,35 @@
                 <dataScope>bank_name</dataScope>
             </settings>
         </field>
+        <field name="month" sortOrder="20" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">emidetails</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>int</dataType>
+                <label translate="true">Month</label>
+                <dataScope>month</dataScope>
+            </settings>
+        </field>
+        <field name="roi" sortOrder="20" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">emidetails</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>float</dataType>
+                <label translate="true">Rate of Interest</label>
+                <dataScope>roi</dataScope>
+            </settings>
+        </field>
     </fieldset>
 </form>

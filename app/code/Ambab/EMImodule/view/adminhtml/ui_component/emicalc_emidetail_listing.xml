@@ -120,6 +120,30 @@
                 <label translate="true">Bank name</label>
             </settings>
         </column>
+        <column name="month">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Month</label>
+            </settings>
+        </column>
+        <column name="roi">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Rate of Interest</label>
+            </settings>
+        </column>
 		<actionsColumn name="actions" class="Ambab\EMImodule\Ui\Component\Listing\Column\EmidetailsActions">
             <settings>
                 <indexField>id</indexField>
