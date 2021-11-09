@@ -12,7 +12,7 @@ require(
             responsive: true,
             innerScroll: true,
             buttons: [{
-                text: $.mage.__('Close'),
+                text: $.mage.__('Ok'),
                 class: 'mymodal1',
                 click: function () {
                     this.closeModal();
@@ -26,3 +26,9 @@ require(
         });
     }
 );
+
+require([
+    'jquery',
+    'accordion'], function ($) {
+    $("#element").collapsible();
+});

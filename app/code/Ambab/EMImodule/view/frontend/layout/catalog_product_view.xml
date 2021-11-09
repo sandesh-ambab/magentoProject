@@ -1,5 +1,9 @@
 <?xml version="1.0"?>
 <page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Ambab_EMImodule::css/style.css" />
+        <script src="Ambab_EMImodule::js/script.js" />
+    </head>
     <body>          
         <referenceBlock name="product.info.main">
             <block class="Ambab\EMImodule\Block\Catalog\Product\View" name="catalog.product.block" after="product.info.price" template="Ambab_EMImodule::catalog/product/view.phtml"/>

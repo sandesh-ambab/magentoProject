@@ -1,85 +1,59 @@
-
 <?php
-
-use Elasticsearch\Endpoints\Ml\Forecast;
-
-if ($block->toShowBlock()): ?>
-<a href="#" id="click-me">EMI starts from $399</a>
-<?php endif; ?>
-
+$price = $block->getProductPrize();
+$collection = $block->getCollection();
+$bank = $block->getOnlyBank();
+$emiLeastAmt = [];
+?>
 <div id="popup-modal">
     <h3> EMI details of banks</h3>
-    <?php
-            $price = $block->getProductPrize();
-            $collection = $block->getCollection();
-    ?>
-    
 
-        <table class="data table" id="test-data-table">
-                <caption class="table-caption">Vky Test Data</caption>
-                <thead>
-                    <tr>
-                        <th scope="col" class="col title">Id</th>
-                        <th scope="col" class="col author">Bank Name</th>
-                        <th scope="col" class="col content">Month</th>
-                        <th scope="col" class="col created_at">Rate of Interest</th>
-                        <th scope="col" class="col actions">Price</th>
-                        <th scope="col" class="col actions">Emi amount</th>
-                    </tr>
-                </thead>
-                <tbody>
-                <?php 
-                    foreach ($collection as $data):
-                    $month = $data->getMonth();
-                    $roi = $data->getRoi();
-                    $roi = $roi / (12 * 100);
-                    $emi = ($price * $roi * pow(1 + $roi, $month)) /  
-                            (pow(1 + $roi, $month) - 1); 
-                    $emiamt = round($emi);
-                    ?>
+    <div id="element" data-mage-init='{"accordion":{"openedState": "active", "collapsible": true, "active": false, "multipleCollapsible": false}}'>
+        <?php foreach ($bank as $data) :
+            $bankname = $data['bank_name']; ?>
+            <button class="accordion" data-role="collapsible">
+                <div data-role="trigger">
+                    <span><?php echo $bankname; ?></span>
+                </div>
+            </button>
+            <div class="panel" data-role="content">
+                <table class="data table" id="test-data-table">
+                    <thead>
                         <tr>
-                            <td data-th="Title" class="col title"><?php echo $data->getId(); ?></td>
-                            <td data-th="Author" class="col author"><?php echo $data->getBankName(); ?></td>
-                            <td data-th="Content" class="col content"><?php echo $data->getMonth(); ?></td>
-                            <td data-th="Date" class="col created_at"><?php echo $data->getRoi(); ?></td>
-                            <td data-th="Date" class="col created_at"><?php echo $price; ?></td>
-                            <td data-th="Date" class="col created_at"><?php echo $emiamt; ?></td>
-
+                            <th scope="col" class="col content">Emi Plan</th>
+                            <th scope="col" class="col created_at">Interest(pa)</th>
+                            <th scope="col" class="col actions">Price</th>
+                            <th scope="col" class="col actions">Total Price</th>
                         </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $bankdetails = $block->getBankDetails($bankname);
+                        foreach ($bankdetails as $bankdesc) :
+                            $month = $bankdesc['month'];
+                            $roi = $bankdesc['roi'];
+                            $r = $roi / (12 * 100);
+                            $emi = $block->emiCalculation($price, $r, $month);
+                            $emiAmount = ceil($emi);
+                            array_push($emiLeastAmt, $emiAmount);
+                            $interestamt = ($emiAmount * $month) - $price;
+                            $totalPrice = $price + $interestamt;
+                        ?>
+                            <tr>
+                                <td data-th="Title" class="col title"><?php echo "$" . $emiAmount . " x " . $bankdesc['month'] . "m"; ?></td>
+                                <td data-th="Title" class="col title"><?php echo "$" . $interestamt . " (" . $bankdesc['roi'] . "%)"; ?></td>
+                                <td data-th="Title" class="col title"><?php echo "$" . $price; ?></td>
+                                <td data-th="Title" class="col title"><?php echo "$" . $totalPrice; ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        <?php endforeach; ?>
     </div>
-<script>
-    require(
-    [
-        'jquery',
-        'Magento_Ui/js/modal/modal'
-    ],
-    function(
-        $,
-        modal
-    ) {
-        var options = {
-            type: 'popup',
-            responsive: true,
-            innerScroll: true,
-            buttons: [{
-                text: $.mage.__('Ok'),
-                class: 'mymodal1',
-                click: function () {
-                    this.closeModal();
-                }
-            }]
-        };
+    <?php $leastEmiValue = min($emiLeastAmt); ?>
+</div>
 
-        var popup = modal(options, $('#popup-modal'));
-        $("#click-me").on('click',function(){
-            $("#popup-modal").modal("openModal");
-        });
-    }
-);
-</script>
-
-
-
+<?php
+if ($block->toShowBlock()) : ?>
+    <a href="#" id="click-me">EMI starts from <?php echo "$" . $leastEmiValue; ?></a>
+<?php endif; ?>
