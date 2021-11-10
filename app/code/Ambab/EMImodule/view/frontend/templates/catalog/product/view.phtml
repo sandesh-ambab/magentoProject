@@ -19,7 +19,8 @@ $emiLeastAmt = [];
                 <table class="data table" id="test-data-table">
                     <thead>
                         <tr>
-                            <th scope="col" class="col content">Emi Plan</th>
+                            <th scope="col" class="col content">EMI Plan</th>
+                            <th scope="col" class="col content">EMI Amount</th>
                             <th scope="col" class="col created_at">Interest(pa)</th>
                             <th scope="col" class="col actions">Price</th>
                             <th scope="col" class="col actions">Total Price</th>
@@ -33,16 +34,16 @@ $emiLeastAmt = [];
                             $roi = $bankdesc['roi'];
                             $r = $roi / (12 * 100);
                             $emi = $block->emiCalculation($price, $r, $month);
-                            $emiAmount = ceil($emi);
-                            array_push($emiLeastAmt, $emiAmount);
-                            $interestamt = ($emiAmount * $month) - $price;
+                            array_push($emiLeastAmt, $emi);
+                            $interestamt = ($emi * $month) - $price;
                             $totalPrice = $price + $interestamt;
                         ?>
                             <tr>
-                                <td data-th="Title" class="col title"><?php echo "$" . $emiAmount . " x " . $bankdesc['month'] . "m"; ?></td>
-                                <td data-th="Title" class="col title"><?php echo "$" . $interestamt . " (" . $bankdesc['roi'] . "%)"; ?></td>
-                                <td data-th="Title" class="col title"><?php echo "$" . $price; ?></td>
-                                <td data-th="Title" class="col title"><?php echo "$" . $totalPrice; ?></td>
+                                <td data-th="Emi" class="col emi"><?php echo $bankdesc['month'] . "m"." @ ". $bankdesc['roi']. "% pa"; ?></td>
+                                <td data-th="Emi" class="col emi"><?php echo "$" . round($emi) . "/month"; ?></td>
+                                <td data-th="Emi" class="col emi"><?php echo "$" . round($interestamt) . " (" . $bankdesc['roi'] . "%)"; ?></td>
+                                <td data-th="Emi" class="col emi"><?php echo "$" . $price; ?></td>
+                                <td data-th="Emi" class="col emi"><?php echo "$" . round($totalPrice); ?></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -55,5 +56,5 @@ $emiLeastAmt = [];
 
 <?php
 if ($block->toShowBlock()) : ?>
-    <a href="#" id="click-me">EMI starts from <?php echo "$" . $leastEmiValue; ?></a>
+   <span>EMI starts from <?php echo "$" . round($leastEmiValue); ?>/month. Standards EMI also available <a href="#" id="click-me">View plans</a></span>
 <?php endif; ?>
