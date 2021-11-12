@@ -1,13 +1,11 @@
-<?php
-$price = $block->getProductPrize();
-$collection = $block->getCollection();
-$bank = $block->getOnlyBank();
-$emiLeastAmt = [];
+ <?php
+   $blockObj= $block->getLayout()->createBlock('Ambab\EMImodule\Block\Catalog\Product\Price');
+   $bank = $blockObj->getOnlyBank();
+   $price = $blockObj->getSubtotal();
 ?>
-<div id="popup-modal">
-    <h3> EMI details of banks</h3>
 
-    <div id="element" data-mage-init='{"accordion":{"openedState": "active", "collapsible": true, "active": false, "multipleCollapsible": false}}'>
+<div id="popup" style="display: none;">
+   <div id="element" data-mage-init='{"accordion":{"openedState": "active", "collapsible": true, "active": false, "multipleCollapsible": false}}'>
         <?php foreach ($bank as $data) :
             $bankname = $data['bank_name']; ?>
             <button class="accordion" data-role="collapsible">
@@ -15,7 +13,7 @@ $emiLeastAmt = [];
                     <span><?php echo $bankname; ?></span>
                 </div>
             </button>
-            <div class="panel" data-role="content">
+            <div data-role="content" class="collapsibleContent">
                 <table class="data table" id="test-data-table">
                     <thead>
                         <tr>
@@ -28,13 +26,12 @@ $emiLeastAmt = [];
                     </thead>
                     <tbody>
                         <?php
-                        $bankdetails = $block->getBankDetails($bankname);
+                        $bankdetails = $blockObj->getBankDetails($bankname);
                         foreach ($bankdetails as $bankdesc) :
                             $month = $bankdesc['month'];
                             $roi = $bankdesc['roi'];
                             $r = $roi / (12 * 100);
-                            $emi = $block->emiCalculation($price, $r, $month);
-                            array_push($emiLeastAmt, $emi);
+                            $emi = $blockObj->emiCalculation($price, $r, $month);
                             $interestamt = ($emi * $month) - $price;
                             $totalPrice = $price + $interestamt;
                         ?>
@@ -50,11 +47,5 @@ $emiLeastAmt = [];
                 </table>
             </div>
         <?php endforeach; ?>
-    </div>
-    <?php $leastEmiValue = min($emiLeastAmt); ?>
+   </div>
 </div>
-
-<?php
-if ($block->toShowBlock()) : ?>
-   <span>EMI starts from <?php echo "$" . round($leastEmiValue); ?>/month. Standards EMI also available <a href="#" id="click-me">View plans</a></span>
-<?php endif; ?>
