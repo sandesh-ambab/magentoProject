@@ -87,6 +87,7 @@
             <settings>
                 <validation>
                     <rule name="required-entry" xsi:type="boolean">true</rule>
+                    <rule name="validate-alpha" xsi:type="boolean">true</rule>
                 </validation>
                 <dataType>text</dataType>
                 <label translate="true">Bank Name</label>
@@ -102,6 +103,11 @@
             <settings>
                 <validation>
                     <rule name="required-entry" xsi:type="boolean">true</rule>
+                    <rule name="validate-number" xsi:type="boolean">true</rule>
+                    <rule name="validate-not-negative-number" xsi:type="boolean">true</rule>
+                    <rule name="validate-greater-than-zero" xsi:type="boolean">true</rule>
+                    <rule name="integer" xsi:type="boolean">true</rule>
+                    <!-- <rule name="validate-digits-range" xsi:type="string">3-24</rule> -->
                 </validation>
                 <dataType>int</dataType>
                 <label translate="true">Month</label>
@@ -117,6 +123,10 @@
             <settings>
                 <validation>
                     <rule name="required-entry" xsi:type="boolean">true</rule>
+                    <rule name="validate-number" xsi:type="boolean">true</rule>
+                    <rule name="validate-not-negative-number" xsi:type="boolean">true</rule>
+                    <rule name="validate-greater-than-zero" xsi:type="boolean">true</rule>
+                    <!-- <rule name="validate-number-range" xsi:type="string">10-20</rule> -->
                 </validation>
                 <dataType>float</dataType>
                 <label translate="true">Rate of Interest</label>

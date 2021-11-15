@@ -42,14 +42,14 @@
                 </argument>
             </arguments>
         </referenceBlock>
-        <referenceContainer name="content"> 
-            <block class="Magento\Framework\View\Element\Template" name="popup" as="popup" template="Ambab_EMImodule::checkout/popup.phtml" after="-"> 
-                <block class="Magento\Cms\Block\Block" name="popup-content"> 
-                    <arguments> 
-                        <argument name="block_id" xsi:type="string">popup-content</argument> 
-                    </arguments> 
-                </block> 
-            </block> 
-        </referenceContainer> 
+        <referenceContainer name="content">
+            <block class="Magento\Framework\View\Element\Template" name="popup" as="popup" template="Ambab_EMImodule::checkout/popup.phtml" after="-">
+                <block class="Magento\Cms\Block\Block" name="popup-content">
+                    <arguments>
+                        <argument name="block_id" xsi:type="string">popup-content</argument>
+                    </arguments>
+                </block>
+            </block>
+        </referenceContainer>
     </body>
 </page>
