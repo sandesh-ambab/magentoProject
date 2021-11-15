@@ -1,5 +1,5 @@
  <?php
-   $blockObj= $block->getLayout()->createBlock('Ambab\EMImodule\Block\Catalog\Product\Price');
+   $blockObj= $block->getLayout()->createBlock('Ambab\EMImodule\Block\Catalog\Product\View');
    $bank = $blockObj->getOnlyBank();
    $price = $blockObj->getSubtotal();
 ?>
@@ -7,7 +7,7 @@
 <div id="popup" style="display: none;">
    <div id="element" data-mage-init='{"accordion":{"openedState": "active", "collapsible": true, "active": false, "multipleCollapsible": false}}'>
         <?php foreach ($bank as $data) :
-            $bankname = $data['bank_name']; ?>
+            $bankname = $data['bank_name']; ?><br>
             <button class="accordion" data-role="collapsible">
                 <div data-role="trigger">
                     <span><?php echo $bankname; ?></span>

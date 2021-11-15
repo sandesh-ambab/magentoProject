@@ -2,27 +2,25 @@
 
 namespace Ambab\EMImodule\Block\Catalog\Product;
 
-use \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
-use \Magento\Framework\Data\Collection\AbstractDb;
-use \Magento\Framework\Data\Collection;
-
 class View extends \Magento\Framework\View\Element\Template
 {
     protected $_dataHelper;
-
     protected $registry;
     protected $emidetailsFactory;
+    protected $subtotal;
 
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
         \Ambab\EMImodule\Helper\Data $dataHelper,
         \Magento\Framework\Registry $registry,
         \Ambab\EMImodule\Model\EmidetailsFactory $emidetailsFactory,
+        \Magento\Checkout\Model\Cart $subtotal,
         array $data = []
     ) {
         $this->_dataHelper = $dataHelper;
         $this->registry = $registry;
         $this->emidetailsFactory = $emidetailsFactory;
+        $this->subtotal = $subtotal;
         parent::__construct($context, $data);
     }
 
@@ -73,5 +71,10 @@ class View extends \Magento\Framework\View\Element\Template
     {
         $emi = ($price * $r * pow(1 + $r, $month)) / (pow(1 + $r, $month) - 1);
         return $emi;
+    }
+
+    public function getSubtotal()
+    {
+        return $this->subtotal->getQuote()->getBaseSubtotal();
     }
 }

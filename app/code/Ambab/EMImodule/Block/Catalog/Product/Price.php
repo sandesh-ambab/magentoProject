@@ -2,9 +2,6 @@
 
 namespace Ambab\EMImodule\Block\Catalog\Product;
 
-use \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
-use \Magento\Framework\Data\Collection\AbstractDb;
-use \Magento\Framework\Data\Collection;
 
 class Price extends \Magento\Framework\View\Element\Template
 {
@@ -78,25 +75,13 @@ class Price extends \Magento\Framework\View\Element\Template
         return $emi;
     }
 
-    public function getItemsQty($itemId = 0) // 0 for all items
-    {
-        return $this->getActiveQuoteAddress()->getItemQty($itemId);
-    }
-
-    /**
-     * @return float
-     */
     public function getSubtotal()
     {
-        return $this->getActiveQuoteAddress()->getBaseSubtotal(); // or any other type of subtotal like subtotal incl tax etc.
+        return $this->getActiveQuoteAddress()->getBaseSubtotal(); 
     }
 
-    /**
-     * @return \Magento\Quote\Model\Quote\Address
-     */
     protected function getActiveQuoteAddress()
     {
-        /** @var \Magento\Quote\Model\Quote $quote */
         $quote = $this->checkoutSession->getQuote();
         if ($quote->isVirtual()) {
             return $quote->getBillingAddress();
