@@ -104,7 +104,6 @@
                 <validation>
                     <rule name="required-entry" xsi:type="boolean">true</rule>
                     <rule name="validate-number" xsi:type="boolean">true</rule>
-                    <rule name="validate-not-negative-number" xsi:type="boolean">true</rule>
                     <rule name="validate-greater-than-zero" xsi:type="boolean">true</rule>
                     <rule name="integer" xsi:type="boolean">true</rule>
                     <!-- <rule name="validate-digits-range" xsi:type="string">3-24</rule> -->
@@ -124,7 +123,6 @@
                 <validation>
                     <rule name="required-entry" xsi:type="boolean">true</rule>
                     <rule name="validate-number" xsi:type="boolean">true</rule>
-                    <rule name="validate-not-negative-number" xsi:type="boolean">true</rule>
                     <rule name="validate-greater-than-zero" xsi:type="boolean">true</rule>
                     <!-- <rule name="validate-number-range" xsi:type="string">10-20</rule> -->
                 </validation>
