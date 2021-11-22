@@ -1,7 +1,8 @@
  <?php
    $blockObj= $block->getLayout()->createBlock('Ambab\EMImodule\Block\Catalog\Product\View');
    $bank = $blockObj->getOnlyBank();
-   $price = $blockObj->getSubtotal();
+   $price = $blockObj->getTotal();
+   $isEnable = $blockObj->toShowBlock();
 ?>
 
 <div id="popup" style="display: none;">
@@ -49,3 +50,7 @@
         <?php endforeach; ?>
    </div>
 </div>
+
+<script>
+    var isEmiEnable = <?php echo json_encode($isEnable)?>
+</script>

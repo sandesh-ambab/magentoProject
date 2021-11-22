@@ -2,6 +2,11 @@
 
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <update handle="styles"/>
+    <head>
+		<title>EMI</title>
+		<script src="Ambab_EMImodule::js/custom_validation.js"/>        
+		<!-- <css src="Ambab_EmiCalculator::css/style.css"/> -->
+	</head>
     <body>
         <referenceContainer name="content">
             <uiComponent name="emicalc_emidetail_listing"/>

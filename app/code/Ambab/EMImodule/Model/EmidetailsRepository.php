@@ -53,7 +53,7 @@ class EmidetailsRepository implements EmidetailsRepositoryInterface
             $this->resource->save($bank);
         } catch (\Exception $exception) {
             throw new CouldNotSaveException(
-                __('Could not save the news: %1', $exception->getMessage()),
+                __('Could not save the bank: %1', $exception->getMessage()),
                 $exception
             );
         }

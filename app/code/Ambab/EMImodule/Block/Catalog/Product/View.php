@@ -73,8 +73,8 @@ class View extends \Magento\Framework\View\Element\Template
         return $emi;
     }
 
-    public function getSubtotal()
+    public function getTotal()
     {
-        return $this->subtotal->getQuote()->getBaseSubtotal();
+        return $this->subtotal->getQuote()->getGrandTotal();
     }
 }

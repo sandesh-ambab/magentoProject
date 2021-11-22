@@ -4,9 +4,6 @@ namespace Ambab\EMImodule\Model\Emidetails;
 use Ambab\EMImodule\Model\ResourceModel\Emidetails\CollectionFactory;
 use Magento\Framework\App\Request\DataPersistorInterface;
 
-/**
- * Class DataProvider
- */
 class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
 {
     /**
@@ -51,7 +48,7 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
             return $this->loadedData;
         }
         $items = $this->collection->getItems();
-        /** @var $news \Rsgitech\News\Model\Allnews */
+        
         foreach ($items as $bank) {
             $this->loadedData[$bank->getId()] = $bank->getData();
         }
