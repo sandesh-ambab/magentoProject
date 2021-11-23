@@ -3,7 +3,7 @@ require(
         'jquery',
         'Magento_Ui/js/modal/modal'
     ],
-    function(
+    function (
         $,
         modal
     ) {
@@ -21,7 +21,7 @@ require(
         };
 
         var popup = modal(options, $('#popup-modal'));
-        $("#click-me").on('click',function(){
+        $("#click-me").on('click', function () {
             $("#popup-modal").modal("openModal");
         });
     }
@@ -30,5 +30,5 @@ require(
 require([
     'jquery',
     'accordion'], function ($) {
-    $("#element").collapsible();
-});
+        $("#element").collapsible();
+    });

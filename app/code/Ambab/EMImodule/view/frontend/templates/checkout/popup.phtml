@@ -29,19 +29,14 @@
                         <?php
                         $bankdetails = $blockObj->getBankDetails($bankname);
                         foreach ($bankdetails as $bankdesc) :
-                            $month = $bankdesc['month'];
-                            $roi = $bankdesc['roi'];
-                            $r = $roi / (12 * 100);
-                            $emi = $blockObj->emiCalculation($price, $r, $month);
-                            $interestamt = ($emi * $month) - $price;
-                            $totalPrice = $price + $interestamt;
+                            $emi = $blockObj->emiCalculation($price, $bankdesc['roi'], $bankdesc['month']);
                         ?>
                             <tr>
                                 <td data-th="Emi" class="col emi"><?php echo $bankdesc['month'] . "m"." @ ". $bankdesc['roi']. "% pa"; ?></td>
-                                <td data-th="Emi" class="col emi"><?php echo "$" . round($emi) . "/month"; ?></td>
-                                <td data-th="Emi" class="col emi"><?php echo "$" . ceil($interestamt) . " (" . $bankdesc['roi'] . "%)"; ?></td>
+                                <td data-th="Emi" class="col emi"><?php echo "$" . round($emi[0]) . "/month"; ?></td>
+                                <td data-th="Emi" class="col emi"><?php echo "$" . ceil($emi[1]) . " (" . $bankdesc['roi'] . "%)"; ?></td>
                                 <td data-th="Emi" class="col emi"><?php echo "$" . $price; ?></td>
-                                <td data-th="Emi" class="col emi"><?php echo "$" . ceil($totalPrice); ?></td>
+                                <td data-th="Emi" class="col emi"><?php echo "$" . ceil($emi[2]); ?></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>

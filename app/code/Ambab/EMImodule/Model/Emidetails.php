@@ -1,13 +1,13 @@
 <?php
 namespace Ambab\EMImodule\Model;
 
-// use Ambab\EMImodule\Api\Data\EmidetailsInterface;
+use Ambab\EMImodule\Api\Data\EmidetailsInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\DataObject\IdentityInterface;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Model\AbstractModel;
 
-class Emidetails extends AbstractModel implements IdentityInterface
+class Emidetails extends AbstractModel implements EmidetailsInterface, IdentityInterface
 {
 	const CACHE_TAG = 'ambab_emicalc';
 	

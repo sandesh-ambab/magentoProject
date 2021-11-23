@@ -53,7 +53,6 @@ class View extends \Magento\Framework\View\Element\Template
             ->distinct(true)
             ->addFieldToSelect('bank_name')
             ->load();
-
         return $collection;
     }
 
@@ -67,14 +66,36 @@ class View extends \Magento\Framework\View\Element\Template
         return $collection;
     }
 
-    public function emiCalculation($price, $r, $month)
+    public function emiCalculation($price, $roi, $month)
     {
+        $emiData = [];
+        $r = $roi / (12 * 100);
         $emi = ($price * $r * pow(1 + $r, $month)) / (pow(1 + $r, $month) - 1);
-        return $emi;
+        $interestamt = ($emi * $month) - $price;
+        $totalPrice = $price + $interestamt;
+        array_push($emiData, $emi, $interestamt, $totalPrice);
+        return $emiData;
     }
 
     public function getTotal()
     {
         return $this->subtotal->getQuote()->getGrandTotal();
     }
+
+    public function getJsonData(){
+        $data = [];
+        foreach ($this->getOnlyBank() as $bank){
+            $data['getBank'][] = $bank['bank_name'];
+            $banks = $bank['bank_name'];
+            foreach ($this->getBankDetails($banks) as $b){
+                $data['EMI roi'][$b['bank_name']]['roi'][] = $b['roi'];
+                $data['EMI month'][$b['bank_name']]['month'][] = $b['month'];
+                
+            }
+        }
+        // $test = json_encode($data);
+        return $data;
+        
+    }
+
 }
