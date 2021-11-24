@@ -1,0 +1,4 @@
+.product-options-bottom .price-box .old-price .price-container > span,
+.product-info-price .price-box .old-price .price-container > span {
+  text-decoration: line-through;
+}
