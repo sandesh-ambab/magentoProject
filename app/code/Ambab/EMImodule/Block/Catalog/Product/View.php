@@ -88,14 +88,10 @@ class View extends \Magento\Framework\View\Element\Template
             $data['getBank'][] = $bank['bank_name'];
             $banks = $bank['bank_name'];
             foreach ($this->getBankDetails($banks) as $b){
-                $data['EMI roi'][$b['bank_name']]['roi'][] = $b['roi'];
-                $data['EMI month'][$b['bank_name']]['month'][] = $b['month'];
-                
+                $data['getMonth'][$b['bank_name']]['roi'][] = $b['roi'];
+                $data['getMonth'][$b['bank_name']]['month'][] = $b['month'];
             }
         }
-        // $test = json_encode($data);
-        return $data;
-        
+        return $data;exit;
     }
-
 }

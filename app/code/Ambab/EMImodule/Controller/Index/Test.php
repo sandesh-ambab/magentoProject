@@ -1,31 +1,27 @@
 <?php
-namespace Mageplaza\HelloWorld\Controller\Index;
+namespace Ambab\EMImodule\Controller\Index;
 
+use Magento\Framework\App\Action\Action;
+use Magento\Framework\App\Action\Context;
 use Magento\Framework\Controller\Result\JsonFactory;
+use Ambab\EMImodule\Block\Catalog\Product\View;
 
-class Test extends \Magento\Framework\App\Action\Action
+class Test extends Action
 {
-	protected $_pageFactory;
-	protected $resultJsonFactory;
+	private $resultJsonFactory;
 	protected $blockData;
-
-	public function __construct(
-		\Magento\Framework\App\Action\Context $context,
-		\Ambab\EMImodule\Block\Catalog\Product\View $blockData,
-		JsonFactory $resultJsonFactory)
-	{
-		$this->_pageFactory = $pageFactory;
-		$this->resultJsonFactory = $resultJsonFactory;
+ 
+    public function __construct(JsonFactory $resultJsonFactory, Context $context, View $blockData)
+    {
+        parent::__construct($context);
+        $this->resultJsonFactory = $resultJsonFactory;
 		$this->blockData = $blockData;
-		return parent::__construct($context);
-	}
+    }
 
 	public function execute()
 	{
 		$resultJson = $this->resultJsonFactory->create(); 
 		$jsonData = $this->blockData->getJsonData();
-		$result = $resultJson->setData($jsonData);
-		return $result; 
-
+		return $resultJson->setData($jsonData);
 	}
 }

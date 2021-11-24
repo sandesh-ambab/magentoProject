@@ -3,16 +3,28 @@ $price = $block->getProductPrize();
 $collection = $block->getCollection();
 $bank = $block->getOnlyBank();
 $emiLeastAmt = [];
-// print_r($block->getJsonData());
+$b = $block->getJsonData();
+$keys = array_values($b);
+        // echo $keys[$b];
+// echo  var_dump($keys[1]);
+// echo json_encode($keys[1]);
+// $json = json_encode($keys);
+// for($i = 0; $i < count($b); $i++) {
+//     echo $keys[$i] . "{<br>";
+//         foreach($b[$keys[$i]] as $key => $value) {
+//             echo $key . " : " . (json_encode($value)) . "<br>";
+//         }
+//         echo "}<br>";
+//     }
+    // echo $keys[$b];
 ?>
-<div id="emi"></div>
 
 <div id="popup-modal">
     <h3> EMI details of banks</h3>
-
     <div id="element" data-mage-init='{"accordion":{"openedState": "active", "collapsible": true, "active": false, "multipleCollapsible": false}}'>
-        <?php foreach ($bank as $data) :
-            $bankname = $data['bank_name']; ?>
+        <?php foreach ($bank as $data) :?>
+            <div id="emi"></div>
+            <?php $bankname = $data['bank_name']; ?>
             <button class="accordion" data-role="collapsible">
                 <div data-role="trigger">
                     <span><?php echo $bankname; ?></span>
@@ -68,24 +80,23 @@ if ($block->toShowBlock()) : ?>
             $('body').on('click', '#click-me', function () {
  
                 // var self = $(this);
-                var url = "<?php echo $block->getUrl() . 'emicalc/Index/Test' ?>";
+                var url = "<?php echo $block->getUrl() . 'emi/Index/Test' ?>";
                 console.log(url);
                 try {
- 
                     $.ajax({
                         url: url,
                         type: 'POST',
                         dataType: 'json',
                         showLoader: true,
                         success: function (data) {
-                            // console.log(json_decode(data));
-                            $("#emi").html(data);
-                            
+                            console.log(data['getMonth']);
+                            let bank = data['getMonth'];
+                            // alert(var_dump(bank));
+                            $("#emi").html(bank); 
                         }
                     });
                 } catch (e) {
                 }
- 
             });
         });
 </script>
