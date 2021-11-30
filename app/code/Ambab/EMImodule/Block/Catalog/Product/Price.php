@@ -5,79 +5,40 @@ namespace Ambab\EMImodule\Block\Catalog\Product;
 
 class Price extends \Magento\Framework\View\Element\Template
 {
-    protected $_dataHelper;
-
-    protected $registry;
-    protected $emidetailsFactory;
     protected $checkoutSession;
+    protected $scopeConfigInterface;
+    protected $GetSalableQuantityDataBySku;
 
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
-        \Ambab\EMImodule\Helper\Data $dataHelper,
-        \Magento\Framework\Registry $registry,
-        \Ambab\EMImodule\Model\EmidetailsFactory $emidetailsFactory,
         \Magento\Checkout\Model\Session $checkoutSession,
+        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfigInterface,
+        \Magento\InventorySalesAdminUi\Model\GetSalableQuantityDataBySku $GetSalableQuantityDataBySku,
+        \Magento\Framework\Registry $registry,
         array $data = []
     ) {
-        $this->_dataHelper = $dataHelper;
-        $this->registry = $registry;
-        $this->emidetailsFactory = $emidetailsFactory;
         $this->checkoutSession = $checkoutSession;
+        $this->scopeConfigInterface = $scopeConfigInterface;
+        $this->GetSalableQuantityDataBySku = $GetSalableQuantityDataBySku;
+
         parent::__construct($context, $data);
     }
 
-    public function toShowBlock()
+    public function _prepareLayout()
     {
-        return $this->_dataHelper->isEmiEnabled();
+        return parent::_prepareLayout();
     }
 
-    public function getCurrentProduct()
-    {
-        return $this->registry->registry('current_product');
-    }
-
-    public function getProductPrize()
-    {
-        $_product = $this->getCurrentProduct();
-        $productprice = $_product->getFinalPrice();
-        return $productprice;
-    }
-
-    public function getCollection()
-    {
-        return $this->emidetailsFactory->create()->getCollection();
-    }
-
-    public function getOnlyBank()
-    {
-        $emiData = $this->emidetailsFactory->create();
-        $collection = $emiData->getCollection()
-            ->distinct(true)
-            ->addFieldToSelect('bank_name')
-            ->load();
-
-        return $collection;
-    }
-
-    public function getBankDetails($bankName)
-    {
-        $emiData = $this->emidetailsFactory->create();
-        $collection = $emiData->getCollection()
-            ->addFieldToFilter('bank_name', ['like'=>$bankName])
-            ->load();
-
-        return $collection;
-    }
-
-    public function emiCalculation($price, $r, $month)
-    {
-        $emi = ($price * $r * pow(1 + $r, $month)) / (pow(1 + $r, $month) - 1);
-        return $emi;
-    }
-
+    // For getting subtotal 
     public function getSubtotal()
     {
-        return $this->getActiveQuoteAddress()->getBaseSubtotal(); 
+        return $this->getActiveQuoteAddress()->getBaseSubtotal();
+    }
+
+    // For getting minimum order amount
+    public function getMinimumOrderAmount()
+    {
+        return $this->scopeConfigInterface->getValue('sales/minimum_order/amount');
     }
 
     protected function getActiveQuoteAddress()
@@ -88,5 +49,12 @@ class Price extends \Magento\Framework\View\Element\Template
         }
 
         return $quote->getShippingAddress();
+    }
+
+    // Prodcut salable qty
+    public function getProductSalableQty($sku)
+    {
+        $salableQty = $this->GetSalableQuantityDataBySku->execute($sku);
+        return $salableQty[0]['qty'];
     }
 }

@@ -92,6 +92,8 @@ class View extends \Magento\Framework\View\Element\Template
                 $data['getMonth'][$b['bank_name']]['month'][] = $b['month'];
             }
         }
-        return $data;exit;
+        return $data;
     }
+
+
 }

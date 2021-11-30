@@ -1,4 +1,28 @@
-.product-options-bottom .price-box .old-price .price-container > span,
 .product-info-price .price-box .old-price .price-container > span {
   text-decoration: line-through;
+}
+
+.discount{
+  font-weight: bold;
+  padding:3px;
+  background-color: rgb(248, 166, 112);
+}
+
+.old-price{
+  text-decoration: line-through;
+}
+
+.custom-wishlist{
+  position: absolute;
+  top: 250px;
+  left: 109px;
+  z-index: 3;
+}
+
+.hot{
+  font-weight: bold;
+}
+
+.hot:after{
+  content: "\1F525";
 }
