@@ -3,7 +3,7 @@
     <route method="GET" url="/V1/customorderdetails/id/:orderId">
         <service class="Ambab\CustomApi\Api\OrderDetailsInterface" method="getOrderDetails"/>
         <resources>
-            <resource ref="anonymous"/>
+            <resource ref="Ambab_CustomApi::orderdetails"/>
         </resources>
     </route>
 </routes>
